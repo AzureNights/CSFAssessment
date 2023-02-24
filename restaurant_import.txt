@@ -1,1 +1,10 @@
 TODO: Task 1 - Write the mongo import command here
+
+To import to local host:
+
+mongoimport -hlocalhost --port=27017 -drestaurants -crestdb --jsonArray /Users/kokila/Documents/GitHub/CSFAssessment/restaurants.json
+
+
+To import to remote Mongo Database: 
+
+mongoimport --uri="mongodb://mongo:54DVUz23HJErwTgfUIZ0@containers-us-west-171.railway.app:6433/?authSource=admin" -drestaurants -crestdb --jsonArray /Users/kokila/Documents/GitHub/CSFAssessment/restaurants.json

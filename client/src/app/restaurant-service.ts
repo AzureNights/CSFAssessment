@@ -1,12 +1,18 @@
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
 import { Restaurant, Comment } from './models'
 
+//@Injectable()
+//is this a  service class tho ??
 export class RestaurantService {
+
+	constructor(private http: HttpClient) { }
 
 	// TODO Task 2 
 	// Use the following method to get a list of cuisines
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
-	public getCuisineList(???) {
+	public getCuisineList (): Promise<Cuisines[]> {
 		// Implememntation in here
 
 	}

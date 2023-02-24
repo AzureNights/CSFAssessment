@@ -1,13 +1,25 @@
 package vttp2022.csf.assessment.server.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import vttp2022.csf.assessment.server.models.Comment;
 import vttp2022.csf.assessment.server.models.Restaurant;
 
+@Repository
 public class RestaurantRepository {
+
+	
+	public static final String C_RESTAURANTS = "restdb";
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
 
 	// TODO Task 2
 	// Use this method to retrive a list of cuisines from the restaurant collection
@@ -15,9 +27,16 @@ public class RestaurantRepository {
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
 	//  
-	public ??? getCuisines(???) {
-		// Implmementation in here
 
+	// query : db.restdb.distinct('cuisine')
+	public List<String> getCuisines() {
+		return mongoTemplate.findDistinct(new Query(), "cuisine", C_RESTAURANTS, getClass(), String.class);
+
+		//_answer = _answer.replaceAll("/", "_");
+		//to replace all the / to _ 
+
+		
+		//now it will return the list of cuisines 
 	}
 
 	// TODO Task 3
@@ -26,8 +45,9 @@ public class RestaurantRepository {
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
 	//  
-	public ??? getRestaurantsByCuisine(???) {
+	public void getRestaurantsByCuisine() {
 		// Implmementation in here
+		//fill inn () and void 
 
 	}
 
@@ -37,8 +57,12 @@ public class RestaurantRepository {
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
 	// Write the Mongo native query above for this method
 	//  
-	public Optional<Restaurant> getRestaurant(???) {
+	public Optional<Restaurant> getRestaurant() {
 		// Implmementation in here
+
+		//fill inn () 
+
+		return null;
 		
 	}
 
@@ -49,6 +73,8 @@ public class RestaurantRepository {
 	//  
 	public void addComment(Comment comment) {
 		// Implmementation in here
+
+		
 		
 	}
 	
