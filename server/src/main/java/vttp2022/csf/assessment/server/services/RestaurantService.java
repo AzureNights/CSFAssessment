@@ -2,9 +2,11 @@ package vttp2022.csf.assessment.server.services;
 
 import java.util.Optional;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.json.Json;
 import vttp2022.csf.assessment.server.models.Comment;
 import vttp2022.csf.assessment.server.models.Restaurant;
 import vttp2022.csf.assessment.server.repositories.MapCache;
@@ -25,12 +27,17 @@ public class RestaurantService {
 	// Use the following method to get a list of cuisines 
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
-	public List<String> getCuisines() {
+	public List<Restaurant> getCuisines() {
 		return restaurantRepo.getCuisines();
+
+	}
+
+	
+	
 
 		// Implmementation in here
 		//fill inn () and void 
-	}
+	
 
 	// TODO Task 3 
 	// Use the following method to get a list of restaurants by cuisine

@@ -3,6 +3,10 @@ package vttp2022.csf.assessment.server.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.Document;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
@@ -20,24 +24,63 @@ public class RestaurantRepository {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
+	
+
 
 	// TODO Task 2
 	// Use this method to retrive a list of cuisines from the restaurant collection
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
-	//  
+
+
+	//public Rest;  
+
+	public JsonObject toJson(Restaurant restaurant) {
+		return Json.createObjectBuilder()
+			.add("restaurantId", Restaurant.restaurantId)
+			.add("name", Restaurant.name)
+			.add("cuisine", Restaurant.cuisine)
+			.add("address", Restaurant.address)
+			.add("coordinates", Restaurant.coordinates)
+			.add("mapUrl", Restaurant.mapUrl)
+			.build();
+
+			//not visible error -_- WHY 
+
+
+	}
+
+	public static Restaurant create(Document doc) {
+		Restaurant rest = new Restaurant();
+		rest.setRestaurantId(doc.getString("restaurant"));
+		rest.setName(doc.getString("name"));
+		rest.setCuisine(doc.getString("cuisine"));
+		rest.setAddress(doc.getString("address"));
+		//rest.setCoordinates(doc.getLatLng("coordinates"));
+		rest.setMapURL(doc.getString("mapUrl"));
+
+		return rest;
+	}
 
 	// query : db.restdb.distinct('cuisine')
-	public List<String> getCuisines() {
-		return mongoTemplate.findDistinct(new Query(), "cuisine", C_RESTAURANTS, getClass(), String.class);
+	public List<Restaurant> getCuisines() {
+		//return mongoTemplate.findDistinct(new Query(), "cuisine", C_RESTAURANTS, getClass(), String.class);
+		Query query = new Query();
+			return mongoTemplate.find(query, Document.class, "restdb")
+				.stream()
+				.map(v -> { return rest.create(v); })
+				.toList();
+		}
+
+
 
 		//_answer = _answer.replaceAll("/", "_");
 		//to replace all the / to _ 
 
 		
 		//now it will return the list of cuisines 
-	}
+	
 
 	// TODO Task 3
 	// Use this method to retrive a all restaurants for a particular cuisine
